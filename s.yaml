@@ -1,0 +1,32 @@
+edition: 1.0.0
+name: sales-coach
+access: default
+
+vars:
+  region: cn-hangzhou
+
+services:
+  sales-coach:
+    component: fc
+    props:
+      region: ${vars.region}
+      service:
+        name: sales-coach
+        description: AI sales coaching demo
+      function:
+        name: sales-coach
+        runtime: custom-container
+        handler: index.handler
+        memorySize: 512
+        timeout: 60
+        customContainerConfig:
+          image: registry.cn-hangzhou.aliyuncs.com/my-fc/sales-coach:latest
+        environmentVariables:
+          BL_TOKEN: ${env.BL_TOKEN}
+          ROLE_CTX: ${env.ROLE_CTX}
+      triggers:
+        - name: http
+          type: http
+          config:
+            authType: anonymous
+            methods: [GET, POST]
