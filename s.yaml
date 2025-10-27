@@ -20,7 +20,7 @@ services:
         memorySize: 512
         timeout: 60
         customContainerConfig:
-          image: registry.cn-hangzhou.aliyuncs.com/my-fc/sales-coach:latest
+          image: registry.cn-hangzhou.aliyuncs.com/my-fc/sales-coach:1-1
         environmentVariables:
           BL_TOKEN: ${env.BL_TOKEN}
           ROLE_CTX: ${env.ROLE_CTX}
@@ -29,4 +29,5 @@ services:
           type: http
           config:
             authType: anonymous
+
             methods: [GET, POST]
